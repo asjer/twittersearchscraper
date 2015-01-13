@@ -27,6 +27,7 @@
           'consumer_secret' => $consumer_secret
       );
       $hide_url = "http://refhide.com/?";
+
       $url = 'https://api.twitter.com/1.1/search/tweets.json';
       $requestMethod = 'GET';
       $getfield = '?f=realtime&q=decorrespondent.nl%2F&src=typd';
@@ -38,11 +39,27 @@
       $response = json_decode($api_response);
 
       foreach($response->statuses as $tweet)
-      {
-        echo '<li class="list-group-item">';
-        echo "<a href=$hide_url{$tweet->entities->urls[0]->expanded_url} target=blank>{$tweet->entities->urls[0]->expanded_url}</a>\n ";
-        echo '</li>';
-      }
+        {
+          $tweeted_url = "{$tweet->entities->urls[0]->expanded_url}";
+          echo '<li class="list-group-item">';
+          #echo "<a href=$hide_url{$tweet->entities->urls[0]->expanded_url} target=blank>{$tweet->entities->urls[0]->expanded_url}</a>\n ";
+
+          $test = preg_replace('/[0-9]+/', '', $tweeted_url);
+          $test2 = preg_replace('https\:\/\/decorrespondent\.nl', '', $test);
+          echo $tes2;
+
+
+          // function convertSpace($string) {
+          //   return str_replace("-", " ", $string);
+          // }
+
+          // $string = $tweeted_url;
+
+          // echo filter_var($string, FILTER_CALLBACK,
+          // array("options"=>"convertSpace"));
+
+          // echo '</li>';
+        }
     ?>
   </ul>
   <footer class="footer">
