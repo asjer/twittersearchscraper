@@ -44,9 +44,10 @@
           echo '<li class="list-group-item">';
           #echo "<a href=$hide_url{$tweet->entities->urls[0]->expanded_url} target=blank>{$tweet->entities->urls[0]->expanded_url}</a>\n ";
 
-          $test = preg_replace('/[0-9]+/', '', $tweeted_url);
-          $test2 = preg_replace('https\:\/\/decorrespondent\.nl', '', $test);
-          echo $tes2;
+          $test = preg_replace('https://decorrespondent.nl', '/', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '', $tweeted_url);
+          #$test = preg_replace('/[0-9]+/', '', $tweeted_url);
+          #$test2 = preg_replace('https\:\/\/decorrespondent\.nl', '', $test);
+          echo $test;
 
 
           // function convertSpace($string) {
