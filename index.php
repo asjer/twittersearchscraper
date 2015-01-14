@@ -44,20 +44,31 @@
           echo '<li class="list-group-item">';
           #echo "<a href=$hide_url{$tweet->entities->urls[0]->expanded_url} target=blank>{$tweet->entities->urls[0]->expanded_url}</a>\n ";
 
-          $test = preg_replace('https://decorrespondent.nl', '/', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '', $tweeted_url);
-          #$test = preg_replace('/[0-9]+/', '', $tweeted_url);
-          #$test2 = preg_replace('https\:\/\/decorrespondent\.nl', '', $test);
-          echo $test;
+          $pattern = '/https:\/\/decorrespondent\.nl\/|0|1|2|3|4|5|6|7|8|9/';
+          $replacement = '';
+          $string_new = preg_replace($pattern, $replacement, $tweeted_url);
+          #echo "string_new: $string_new <br>";
 
+          $pattern2 = '/-/';
+          $replacement2 = ' ';
+          $string_new2 = preg_replace($pattern2, $replacement2, $string_new);
+          #echo "string_new2: $string_new2 <br>";
 
-          // function convertSpace($string) {
-          //   return str_replace("-", " ", $string);
-          // }
+          $pattern3 = '/\//';
+          $replacement3 = '';
+          $string_new3 = preg_replace($pattern3, $replacement2, $string_new2);
+          #echo "string_new3: $string_new3 <br>";
 
-          // $string = $tweeted_url;
+          $pattern4 = '/http\:\s+fb\.me|http\:\s+bit\.ly/';
+          $replacement4 = '';
+          $string_new4 = preg_replace($pattern4, $replacement4, $string_new3);
+          #echo "fb en bitly delete: $string_new4 <br>";
 
-          // echo filter_var($string, FILTER_CALLBACK,
-          // array("options"=>"convertSpace"));
+          $lastSpacePosition = strrpos($string_new4, ' ');
+          $last_string = substr($string_new4, 0, $lastSpacePosition);
+
+          
+          echo "<a href=$hide_url{$tweet->entities->urls[0]->expanded_url} target=blank>$last_string</a>\n ";
 
           // echo '</li>';
         }
