@@ -67,8 +67,9 @@
           $lastSpacePosition = strrpos($string_new4, ' ');
           $last_string = substr($string_new4, 0, $lastSpacePosition);
 
-          
-          echo "<a href=$hide_url{$tweet->entities->urls[0]->expanded_url} target=blank>$last_string</a>\n ";
+          $last_string2=preg_replace("/[\n\r]/","",$last_string);
+
+          echo "<a href=$hide_url{$tweet->entities->urls[0]->expanded_url} target=blank>$last_string2</a>\n ";
 
           // echo '</li>';
         }
